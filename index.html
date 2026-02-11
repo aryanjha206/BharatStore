@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install BharatStore - India's Own App Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="static/BharatStore.png">
+    <style>
+        :root {
+            --primary-saffron: #FF9933;
+            --primary-white: #FFFFFF;
+            --primary-green: #138808;
+            --primary-blue: #000080;
+            --text-dark: #1A202C;
+            --text-muted: #718096;
+            --bg-light: #F7FAFC;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(1deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 153, 51, 0.4);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 20px rgba(255, 153, 51, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 153, 51, 0);
+            }
+        }
+
+        /* Glassmorphism Classes */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 0.8rem 5%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo-container img {
+            height: 45px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 8% 4rem;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 153, 51, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(19, 136, 8, 0.08) 0%, transparent 40%);
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(255, 153, 51, 0.1);
+            color: var(--primary-saffron);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-saffron) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(135deg, var(--primary-saffron) 0%, #FF7700 100%);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 15px 35px rgba(255, 153, 51, 0.3);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(255, 153, 51, 0.45);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .phone-mockup {
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.12));
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 8%;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-saffron);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .icon-1 {
+            background: rgba(255, 153, 51, 0.1);
+            color: var(--primary-saffron);
+        }
+
+        .icon-2 {
+            background: rgba(19, 136, 8, 0.1);
+            color: var(--primary-green);
+        }
+
+        .icon-3 {
+            background: rgba(0, 0, 128, 0.1);
+            color: var(--primary-blue);
+        }
+
+        /* Installation Guide */
+        .install-guide {
+            padding: 6rem 8%;
+            background-color: var(--bg-light);
+        }
+
+        .step-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 4rem;
+        }
+
+        .step-card {
+            flex: 1;
+            min-width: 250px;
+            max-width: 320px;
+            padding: 2.5rem;
+            text-align: center;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45px;
+            height: 45px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border: 4px solid var(--bg-light);
+        }
+
+        /* Testimonials/Screenshots Overlay */
+        .preview-section {
+            padding: 6rem 0;
+            overflow: hidden;
+            background: white;
+        }
+
+        .scrolling-wrapper {
+            display: flex;
+            white-space: nowrap;
+            gap: 2rem;
+            padding: 2rem;
+            animation: scroll 40s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .app-screenshot {
+            height: 380px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            pointer-events: none;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 8rem 8%;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #000044 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 153, 51, 0.1) 0%, transparent 70%);
+        }
+
+        .cta h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 8% 2rem;
+            background: white;
+            text-align: center;
+            border-top: 1px solid #edf2f7;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-socials a {
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .footer-socials a:hover {
+            color: var(--primary-saffron);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Improvements */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 10rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                margin: 0 auto 2.5rem;
+            }
+
+            .hero-image {
+                margin-top: 4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .btn-download {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .app-screenshot {
+                height: 220px !important;
+                border-radius: 12px !important;
+            }
+
+            .scrolling-wrapper {
+                gap: 1rem !important;
+                padding: 1rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Transparent Navbar -->
+    <nav id="navbar">
+        <a href="#" class="logo-container">
+            <img src="static/BharatStore.png" alt="BharatStore"
+                onerror="this.src='https://via.placeholder.com/200x60?text=BharatStore'">
+        </a>
+        <div class="nav-actions">
+            <a href="Bharat%20Store.apk" class="btn-download"
+                style="padding: 0.6rem 1.2rem; font-size: 0.9rem; animation: none;">
+                <i class="fas fa-download"></i> Get APK
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag"><i class="fas fa-shield-alt"></i> 100% Secure & Localized</span>
+            <h1>Discover India's Best Apps on BharatStore</h1>
+            <p>The first localized app marketplace built specifically for Bharat. Thousands of secure, trending, and
+                regional apps at your fingertips.</p>
+            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                <a href="Bharat%20Store.apk" class="btn-download">
+                    <div style="text-align: left;">
+                        <span style="display: block; font-size: 0.8rem; font-weight: 400; opacity: 0.9;">Download
+                            Now</span>
+                        <span>BharatStore.apk</span>
+                    </div>
+                    <i class="fas fa-file-download fa-2x"></i>
+                </a>
+                <a href="https://bharat-store.vercel.app/" target="_blank" class="btn-download"
+                    style="background: white; color: var(--primary-blue); border: 2px solid var(--primary-blue); box-shadow: 0 10px 25px rgba(0,0,128,0.1); animation: none;">
+                    <div style="text-align: left;">
+                        <span style="display: block; font-size: 0.8rem; font-weight: 400; opacity: 0.9;">Open
+                            Online</span>
+                        <span>Visit Website</span>
+                    </div>
+                    <i class="fas fa-external-link-alt fa-2x"></i>
+                </a>
+            </div>
+            <div style="margin-top: 1.5rem; display: flex; gap: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+                <span><i class="fas fa-check-circle" style="color: var(--primary-green);"></i> Made in India</span>
+                <span><i class="fas fa-check-circle" style="color: var(--primary-green);"></i> No Account
+                    Required</span>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="static/BharatStore.png" alt="BharatStore Logo" class="phone-mockup"
+                style="background: white; padding: 3rem; border-radius: 44px; object-fit: contain;">
+            <!-- Fallback if logo fails -->
+            <div id="phone-fallback"
+                style="display:none; width: 300px; height: 600px; border: 12px solid #222; border-radius: 40px; background: #eee;">
+            </div>
+        </div>
+    </section>
+
+    <section class="preview-section">
+        <div class="scrolling-wrapper"
+            style="animation: none; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 2rem 5%;">
+            <img src="1.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="2.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="3.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="4.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="7.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="8.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="9.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="10.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="11.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="12.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="13.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="14.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+            <img src="15.png" alt="Screenshot" class="app-screenshot" style="scroll-snap-align: center;">
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="features">
+        <div class="section-header">
+            <h2>Why Choose BharatStore?</h2>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Experience a marketplace that
+                understands your language, your needs, and your culture.</p>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-card glass">
+                <div class="feature-icon icon-1">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3>Regional Support</h3>
+                <p>Browse apps in your own language. From Hindi to Tamil, we've got you covered.</p>
+            </div>
+            <div class="feature-card glass">
+                <div class="feature-icon icon-2">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Lighter & Faster</h3>
+                <p>Optimized for Indian network conditions. Download and update with minimal data.</p>
+            </div>
+            <div class="feature-card glass">
+                <div class="feature-icon icon-3">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>Trusted Developers</h3>
+                <p>Every app is manually reviewed by our moderation team for safety and quality.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Steps -->
+    <section class="install-guide">
+        <div class="section-header">
+            <h2>How to Install?</h2>
+            <p>Setting up BharatStore is easy. Just follow these 4 steps.</p>
+        </div>
+        <div class="step-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Download APK</h3>
+                <p>Click the download button to save the BharatStore APK file to your device.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Open File</h3>
+                <p>Tap on the downloaded file from your notification bar or File Manager.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Allow Sources</h3>
+                <p>If prompted, enable "Install from Unknown Sources" in your Android settings.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Complete!</h3>
+                <p>Tap "Install" and wait for the process to finish. Open BharatStore and enjoy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Explore the Digital Bharat?</h2>
+        <a href="Bharat%20Store.apk" class="btn-download"
+            style="background: white; color: var(--primary-blue); box-shadow: 0 15px 35px rgba(0,0,0,0.2);">
+            <span>Download BharatStore Now</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-socials">
+            <a href="https://instagram.com/jhaaryaan" target="_blank" rel="noopener noreferrer"><i
+                    class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/jhaaryaan" target="_blank" rel="noopener noreferrer"><i
+                    class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://linkedin.com/in/jhaaryaan" target="_blank" rel="noopener noreferrer"><i
+                    class="fa-brands fa-linkedin"></i></a>
+            <a href="https://youtube.com/@jhaaryaan" target="_blank" rel="noopener noreferrer"><i
+                    class="fa-brands fa-youtube"></i></a>
+        </div>
+        <div class="copyright">
+            <img src="static/BharatStore.png" alt="Logo"
+                style="height: 30px; opacity: 0.5; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;">
+            <p>&copy; 2026 BharatStore. Proudly Built in India.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scroll for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
